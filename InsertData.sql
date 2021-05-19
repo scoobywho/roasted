@@ -1,0 +1,2 @@
+INSERT INTO fox (ID,Name) 
+VALUES ('50','BATMOBILE');
