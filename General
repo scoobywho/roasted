@@ -1,0 +1,6 @@
+Tools
+ - Github: for version control
+ - Jenkins: will be  used to build and test your software projects
+ - Docker:  makes it easier to create, deploy, and run applications by using containers.
+
+The developer first pushes a commit to GitHub, which in turn uses a webhook to notify Jenkins of the update. Jenkins can then pull the GitHub repository, build the Docker container which contains our stack and then run the test. If the test passes, Jenkins will push the code to the master branch. I would also create branches for different phases for the Developement, UAT and Production, where pull request will have to be approved before it can be merged to the next phase
