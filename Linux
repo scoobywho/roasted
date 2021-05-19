@@ -1,0 +1,58 @@
+Q:What is the command to list the contents of a direcory, line by line and ordered by size ascending in human readable format?
+$ ls -alrthS
+
+Q:How would you add a DNS server to a network interface in Linux?
+You would need to add it to the active interface, by editing the connection, so if the connection name is mycon on Centos7 you would edit the file below, 
+# vi /etc/sysconfig/network-scripts/ifcfg-mycon
+and add the following entry,
+DNS1=10.2.31.12
+
+
+Q:If the DNS server you've just added is not reachable, how can you get any particular hostname to resolve locally?
+Add a entry in the hosts file, with the IP and hostname that it should resolve to,
+Path of the file in Centos7 
+# vi /etc/hosts
+Enter the IP follwed by hostname in the hosts file
+10.2.30.10 example.com
+
+Q:How would you check for SELinux related errors?
+- When SELinux denies an action, an (AVC) message is logged to the /var/log/audit/audit.log and /var/log/messages
+- Use the journalctl utility to view more information about the AVC message
+# journalctl -t setroubleshoot --since= [time]
+- Use the sealert utility to further inspect the AVC message
+# sealert -l [message_ID
+
+Q:Write the commands to add 30GB disk space to a logical volume named "docker" that belongs to a logical group named "docker-group".
+Prepare the disk
+To check the disks on the VM and the new disk that was added
+# fdisk -l
+
+Prepare the disk using the fidk utility
+# fdisk /dev/sdb
+n - new partition
+p - primary partition
+partition number - enter for 1
+first sector - press enter for default
+last sector - press enter for default
+
+t and select 8e lvm
+p to verify 
+w to write changes
+
+partprobe - run partprobe 
+
+format the disk
+mkfs.ext4 /dev/sdb1
+
+Create a PV with the new disk
+# pvcreate /dev/sdb1
+
+extend the volume group with the new disk
+# vgextend docker-group /dev/sdb1
+
+create LV 
+# lvcreate -L {sizeG} -n docker-group docker
+
+Create a file system on the new disk
+# mkfs.ext4 /dev/mapper/docker-group-docker
+
