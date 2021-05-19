@@ -1,0 +1,17 @@
+Q: Write the command used to login to a remote OpenShift cluster.
+oc login
+
+Q: Write the command to add the "cluster-admin" cluster role to a user called "clark".
+oc adm policy add-role-to-user admin clark
+
+Q: Write the command used to list all pods in the "smallville" project (namespace).
+oc project  smallville
+oc get pods
+
+Q: Write the command to scale an application (deployment config) called "dailyplanet" to 2 pods.
+oc scale dc dailyplanet --replicas=2
+
+Q: Write the command to gain remote shell access to a pod called "lex" in the "smallville" project (namespace).
+oc rsh lex
+
+Write the command to export a secret called "loislane" in JSon format, the secret is in the "dailyplanet" project (namespace).
